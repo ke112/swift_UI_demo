@@ -12,6 +12,7 @@ import UIKit
 enum EventType: String {
     case click = "click"
     case show = "show"
+    case custom = "custom"
 }
 
 // 埋点工具类
@@ -186,6 +187,14 @@ class AnalyticsUtil {
         // TODO: 实现实际的埋点上报逻辑
         // 例如调用第三方SDK的上报接口
         // 这里只是一个占位，实际项目中需要替换为真正的上报逻辑
+    }
+    
+    // 便捷方法 - 自定义事件
+    func trackEvent(
+        name: String,
+        parameters: [String: Any]? = nil
+    ) {
+        track(event: .custom, eventName: name, spec: parameters)
     }
     
     // 便捷方法 - 点击事件
