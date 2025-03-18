@@ -15,6 +15,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) -> Bool {
         setupAnalytics()
         setupLogger()
+        // 请求通知权限（用于获取通知状态）
+        requestNotificationPermission()
         return true
     }
     
@@ -26,6 +28,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     private func setupLogger() {
         // 配置日志服务
         LoggerUtil.shared.info("应用启动")
+    }
+    
+    // 请求通知权限
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if let error = error {
+                LoggerUtil.shared.error("通知权限请求失败: \(error.localizedDescription)")
+            }
+        }
     }
 }
 

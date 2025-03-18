@@ -8,7 +8,7 @@ struct MainTabView: View {
             HomeView()
                 .tabItem {
                     Image(systemName: "house.fill")
-                    Text("首页")
+                    Text("搜索")
                 }
                 .tag(0)
             

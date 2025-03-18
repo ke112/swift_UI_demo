@@ -1,45 +1,40 @@
 import SwiftUI
 
 struct ToolsView: View {
-    let tools = [
-        ("扫一扫", "qrcode.viewfinder"),
-        ("图片识别", "text.viewfinder"),
-        ("翻译", "character.book.closed"),
-        ("计算器", "plus.slash.minus"),
-        ("日历", "calendar"),
-        ("天气", "cloud.sun.fill"),
-        ("记事本", "note.text"),
-        ("文件", "folder")
-    ]
-    
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    @StateObject private var viewModel = ToolsViewModel()
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(tools, id: \.0) { tool in
-                        VStack {
-                            Image(systemName: tool.1)
-                                .font(.system(size: 30))
-                                .frame(width: 60, height: 60)
-                                .background(Color.blue.opacity(0.1))
-                                .foregroundColor(.blue)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                            
-                            Text(tool.0)
-                                .font(.caption)
-                                .foregroundColor(.primary)
+            List(viewModel.tools) { tool in
+                Button(action: { viewModel.openTool(tool) }) {
+                    HStack {
+                        Image(systemName: tool.icon)
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.blue)
+                        
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(tool.title)
+                                    .font(.headline)
+                                if tool.isNew {
+                                    Text("New")
+                                        .font(.caption)
+                                        .foregroundColor(.red)
+                                        .padding(4)
+                                        .background(Color.red.opacity(0.1))
+                                        .cornerRadius(4)
+                                }
+                            }
+                            Text(tool.description)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
                         }
                     }
                 }
-                .padding()
+                .padding(.vertical, 8)
             }
-            .navigationTitle("工具")
+            .navigationTitle("智能工具")
         }
     }
 }
