@@ -6,6 +6,8 @@ struct Post: Identifiable {
     let title: String
     let description: String
     var likes: Int
+    let height: CGFloat
+    var isLike: Bool
 }
 
 struct HomeItem: Identifiable {
