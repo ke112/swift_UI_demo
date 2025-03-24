@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -24,7 +24,7 @@ struct ProfileView: View {
                         .padding(.vertical, 8)
                     }
                 }
-                
+
                 Section(header: Text("常用功能")) {
                     ForEach(viewModel.commonFeatures) { feature in
                         NavigationLink(destination: Text(feature.destination)) {
@@ -32,14 +32,14 @@ struct ProfileView: View {
                         }
                     }
                 }
-                
+
                 Section(header: Text("其他")) {
                     ForEach(viewModel.otherFeatures) { feature in
                         NavigationLink(destination: Text(feature.destination)) {
                             Label(feature.title, systemImage: feature.icon)
                         }
                     }
-                    
+
                     Button(action: viewModel.logout) {
                         Text("退出登录")
                             .foregroundColor(.red)
@@ -56,4 +56,4 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
     }
-} 
+}

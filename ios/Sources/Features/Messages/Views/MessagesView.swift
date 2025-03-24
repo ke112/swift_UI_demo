@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MessagesView: View {
     @StateObject private var viewModel = MessagesViewModel()
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -14,7 +14,7 @@ struct MessagesView: View {
                             }) {
                                 Label("标记已读", systemImage: "checkmark")
                             }
-                            
+
                             Button(action: {
                                 viewModel.deleteMessage(message)
                             }) {
@@ -42,10 +42,10 @@ struct MessagesView: View {
 struct RefreshControl: View {
     let coordinateSpace: CoordinateSpace
     let onRefresh: () async -> Void
-    
+
     @State private var refresh: Bool = false
     @State private var frozen: Bool = false
-    
+
     var body: some View {
         GeometryReader { geometry in
             if geometry.frame(in: coordinateSpace).midY > 50 {
@@ -53,7 +53,7 @@ struct RefreshControl: View {
                     .onAppear {
                         if !refresh {
                             refresh = true
-                            
+
                             Task {
                                 await onRefresh()
                                 refresh = false
@@ -81,14 +81,14 @@ struct RefreshControl: View {
 
 struct MessageRow: View {
     let message: Message
-    
+
     var body: some View {
         HStack {
             Image(systemName: message.avatar)
                 .resizable()
                 .frame(width: 40, height: 40)
                 .clipShape(Circle())
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(message.name)
@@ -98,13 +98,13 @@ struct MessageRow: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
-                
+
                 Text(message.content)
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .lineLimit(1)
             }
-            
+
             if message.unreadCount > 0 {
                 Spacer()
                 Text("\(message.unreadCount)")
@@ -123,4 +123,4 @@ struct MessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MessagesView()
     }
-} 
+}

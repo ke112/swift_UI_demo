@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -12,7 +12,7 @@ struct HomeView: View {
                         .padding(8)
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
-                    
+
                     Button(action: viewModel.performSearch) {
                         Text("搜索")
                             .padding(.horizontal)
@@ -23,7 +23,7 @@ struct HomeView: View {
                     }
                 }
                 .padding()
-                
+
                 // 分类标签
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
@@ -40,7 +40,7 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                 }
-                
+
                 // 瀑布流内容列表
                 ScrollView {
                     WaterfallGrid(items: viewModel.posts, columns: 2) { post in
@@ -59,16 +59,16 @@ struct WaterfallGrid<Item: Identifiable, Content: View>: View {
     let items: [Item]
     let columns: Int
     let content: (Item) -> Content
-    
+
     init(items: [Item], columns: Int, @ViewBuilder content: @escaping (Item) -> Content) {
         self.items = items
         self.columns = columns
         self.content = content
     }
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            ForEach(0..<columns, id: \.self) { columnIndex in
+            ForEach(0 ..< columns, id: \.self) { columnIndex in
                 LazyVStack(spacing: 10) {
                     ForEach(items.indices.filter { $0 % columns == columnIndex }, id: \.self) { index in
                         content(items[index])
@@ -78,7 +78,6 @@ struct WaterfallGrid<Item: Identifiable, Content: View>: View {
         }
     }
 }
-
 
 #Preview {
     HomeView()

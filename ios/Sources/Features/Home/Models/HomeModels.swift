@@ -13,4 +13,4 @@ struct Post: Identifiable {
 struct HomeItem: Identifiable {
     let id: Int
     let title: String
-} 
+}

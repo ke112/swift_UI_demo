@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ToolsView: View {
     @StateObject private var viewModel = ToolsViewModel()
-    
+
     var body: some View {
         NavigationView {
             List(viewModel.tools) { tool in
@@ -12,7 +12,7 @@ struct ToolsView: View {
                             .resizable()
                             .frame(width: 40, height: 40)
                             .foregroundColor(.blue)
-                        
+
                         VStack(alignment: .leading) {
                             HStack {
                                 Text(tool.title)
@@ -43,4 +43,4 @@ struct ToolsView_Previews: PreviewProvider {
     static var previews: some View {
         ToolsView()
     }
-} 
+}

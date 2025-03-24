@@ -7,4 +7,4 @@ struct Message: Identifiable {
     let content: String
     let time: String
     var unreadCount: Int
-} 
+}

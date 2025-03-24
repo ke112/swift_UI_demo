@@ -13,7 +13,7 @@ extension View {
             )
         }
     }
-    
+
     func loading(_ isLoading: Bool) -> some View {
         ZStack {
             self
@@ -24,4 +24,4 @@ extension View {
             }
         }
     }
-} 
+}

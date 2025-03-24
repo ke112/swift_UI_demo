@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import UIKit
 import SystemConfiguration
+import UIKit
 
 /// 设备信息工具类
 /// 负责收集设备相关信息，不包含埋点逻辑
 class DeviceInfoUtil {
     static let shared = DeviceInfoUtil()
-    
+
     private init() {}
-    
+
     // 获取设备唯一标识符
     func getDeviceUUID() -> String {
         if let uuid = UIDevice.current.identifierForVendor?.uuidString {
@@ -23,12 +23,12 @@ class DeviceInfoUtil {
         }
         return UUID().uuidString
     }
-    
+
     // 获取设备名称
     func getDeviceName() -> String {
         return UIDevice.current.name
     }
-    
+
     // 获取设备型号
     func getDeviceModel() -> String {
         var systemInfo = utsname()
@@ -40,17 +40,17 @@ class DeviceInfoUtil {
         }
         return identifier
     }
-    
+
     // 获取操作系统名称
     func getOSName() -> String {
         return UIDevice.current.systemName
     }
-    
+
     // 获取操作系统版本
     func getOSVersion() -> String {
         return UIDevice.current.systemVersion
     }
-    
+
     // 获取App版本
     func getAppVersion() -> String {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
@@ -58,7 +58,7 @@ class DeviceInfoUtil {
         }
         return "unknown"
     }
-    
+
     // 获取App构建版本
     func getAppBuildVersion() -> String {
         if let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
@@ -66,17 +66,17 @@ class DeviceInfoUtil {
         }
         return "unknown"
     }
-    
+
     // 获取App包名
     func getAppBundleId() -> String {
         return Bundle.main.bundleIdentifier ?? "unknown"
     }
-    
+
     // 获取屏幕尺寸
     func getScreenSize() -> CGSize {
         return UIScreen.main.bounds.size
     }
-    
+
     // 获取通知权限状态
     func getNotificationStatus(completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -86,13 +86,13 @@ class DeviceInfoUtil {
             }
         }
     }
-    
+
     // 获取当前环境
     func getEnvironment() -> String {
         #if DEBUG
-        return "dev"
+            return "dev"
         #else
-        return "prod"
+            return "prod"
         #endif
     }
-} 
+}

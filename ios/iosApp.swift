@@ -10,8 +10,8 @@ import SwiftUI
 // AppDelegate类现在作为内部类
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         setupAnalytics()
         setupLogger()
@@ -19,20 +19,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         requestNotificationPermission()
         return true
     }
-    
+
     private func setupAnalytics() {
         // 配置分析服务
         AnalyticsUtil.shared.trackShow(origin: "app", entity: "launch")
     }
-    
+
     private func setupLogger() {
         // 配置日志服务
         LoggerUtil.shared.info("应用启动")
     }
-    
+
     // 请求通知权限
     private func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, error in
             if let error = error {
                 LoggerUtil.shared.error("通知权限请求失败: \(error.localizedDescription)")
             }
@@ -44,7 +44,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct iosApp: App {
     // 使用UIApplicationDelegateAdaptor将AppDelegate与SwiftUI生命周期关联
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     var body: some Scene {
         WindowGroup {
             MainTabView()
